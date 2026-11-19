@@ -1,0 +1,34 @@
+name: Publish to npm
+
+# Runs when a GitHub release is published, or by hand from the Actions tab.
+# Uses npm Trusted Publishing (OIDC) with provenance: no token is stored.
+# One-time setup on npmjs.com, after the package exists: package Settings >
+# Trusted Publisher > GitHub Actions, owner treza-labs, repository
+# treza-ai-sdk, workflow publish.yml.
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'treza-labs' }}
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          registry-url: "https://registry.npmjs.org"
+          cache: npm
+      - run: npm install -g npm@latest
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm publish --access public --provenance

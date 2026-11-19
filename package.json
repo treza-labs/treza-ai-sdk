@@ -1,0 +1,63 @@
+{
+  "name": "@treza/ai-sdk",
+  "version": "0.1.0",
+  "description": "Treza tools for the Vercel AI SDK: generate AI images and video and run Treza pipelines, with a price cap on every render.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ai",
+    "ai-sdk",
+    "vercel",
+    "treza",
+    "tools",
+    "ai video",
+    "image generation",
+    "video generation"
+  ],
+  "homepage": "https://www.trezalabs.com/integrations/ai-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/treza-labs/treza-ai-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/treza-labs/treza-ai-sdk/issues"
+  },
+  "author": "Treza Labs, Inc. <hello@trezalabs.com>",
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "ai": ">=5.0.0",
+    "zod": "^3.25.0 || ^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "ai": "^7.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0",
+    "zod": "^4.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
